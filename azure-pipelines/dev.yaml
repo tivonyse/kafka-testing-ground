@@ -55,10 +55,10 @@ stages:
       - template: jobs/docker.yaml
 
   - stage: PublishPipelineArtifactoryStage
-      displayName: Publish Pipeline Artifactory (Docker)
-      condition: or(eq(variables.isTag,'True'), and(succeeded(), eq(variables.deployMain,'True')))
-      jobs:
-        - template: jobs/publish-artifact.yaml
+    displayName: Publish Pipeline Artifactory (Docker)
+    condition: or(eq(variables.isTag,'True'), and(succeeded(), eq(variables.deployMain,'True')))
+    jobs:
+      - template: jobs/publish-artifact.yaml
 
   # Deploy (Disabled)
   # ------
