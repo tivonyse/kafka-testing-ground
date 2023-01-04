@@ -3,7 +3,7 @@ variables:
   # ARM
   armConnection:    Work For Poc
   acrConnection:    d9b3c0e7-0599-43fc-879d-754e5e044820
-  resourceGroup:    tylab-offer-management-service-poc-rg
+  resourceGroup:    test-azp-aks-rg
 
   # Pipeline conditions
   isMain:           ${{ eq(variables['Build.SourceBranch'], 'refs/heads/main') }}
@@ -17,7 +17,7 @@ variables:
 
   # Docker
   dockerRegistry:   tylabcr.azurecr.io
-  imageName:        tylab-offer-management-service-poc
+  imageName:        tylab-azp-ci-poc
   ${{ if eq(variables.isTag, 'False') }}:
     imageTag:       dev
   ${{ if eq(variables.isTag, 'True') }}:

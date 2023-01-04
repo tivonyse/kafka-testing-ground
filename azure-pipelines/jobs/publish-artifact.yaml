@@ -1,0 +1,10 @@
+jobs:
+  - job: PublishArtifactory
+    displayName: Publish Artifactory
+    steps:
+      - template: ../steps/debug-vars.yaml
+      - task: PublishPipelineArtifact@1
+          inputs:
+            targetPath: '$(Pipeline.Workspace)/s/kubernetes'
+            artifact: 'manifests'
+            publishLocation: 'pipeline'
