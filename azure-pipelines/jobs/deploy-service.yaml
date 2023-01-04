@@ -41,4 +41,4 @@ jobs:
                   $(Pipeline.Workspace)/manifests/deployment/deployment.yaml
                   $(Pipeline.Workspace)/manifests/service/service.yaml
                 imagePullSecrets: $(azAcrSecret)
-                containers: '$(containerRegistry)/$(imageRepository):$(tag)'
+                containers: '$(containerRegistry)/$(imageName):$(imageTag)'
