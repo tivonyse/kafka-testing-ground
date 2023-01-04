@@ -66,4 +66,4 @@ stages:
     displayName: Deploy (Azure Kubernetes Services)
     condition: and(succeeded(), eq(variables.deployMain,'True'))
     jobs:
-      - template: jobs/deploy-service.yaml
+      - template: jobs/deploy-service-dev.yaml

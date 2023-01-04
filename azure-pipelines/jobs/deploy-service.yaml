@@ -1,5 +1,5 @@
 jobs:
-  - deployment: Delpoy
+  - deployment: Deploy
     environment: $(aksEnvironment)
     displayName: Deploy to Azure Kubernetes Service
     pool:
@@ -38,7 +38,7 @@ jobs:
                 kubernetesServiceConnection: 'test-aks-master-enable'
                 namespace: 'ihb'
                 manifests: |
-                  $(Pipeline.Workspace)/manifests/deployment.yaml
-                  $(Pipeline.Workspace)/manifests/service.yaml
+                  $(Pipeline.Workspace)/manifests/deployment/deployment-$(imageTag).yaml
+                  $(Pipeline.Workspace)/manifests/service/service-$(imageTag).yaml
                 imagePullSecrets: $(azAcrSecret)
                 containers: '$(containerRegistry)/$(imageRepository):$(tag)'
