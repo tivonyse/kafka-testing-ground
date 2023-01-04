@@ -50,6 +50,7 @@ stages:
   - stage: DockerStage
     displayName: Build (Docker)
     condition: or(eq(variables.isTag,'True'), and(succeeded(), eq(variables.deployMain,'True')))
+    dependsOn: TestStage
     jobs:
       - template: jobs/docker.yaml
 
