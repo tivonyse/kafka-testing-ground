@@ -1,13 +1,12 @@
 jobs:
-  - job: BuildAndScan
-    displayName: Build and Scan
-    steps:
-      - template: ../steps/debug-vars.yaml
-
-      - bash: |
-          docker build -t $(dockerImage):$(imageTag) .
-        displayName: Docker - build
-
+#  - job: BuildAndScan
+#    displayName: Build and Scan
+#    steps:
+#      - template: ../steps/debug-vars.yaml
+#
+#      - bash: |
+#          docker build -t $(dockerImage):$(imageTag) .
+#        displayName: Docker - build
 #      - task: SnykSecurityScan@0
 #        displayName: Snyk - security scan
 #        continueOnError: true
