@@ -1,0 +1,32 @@
+variables:
+
+  # ARM
+  armConnection:    Work For Poc
+  acrConnection:    d9b3c0e7-0599-43fc-879d-754e5e044820
+  resourceGroup:    tylab-offer-management-service-poc-rg
+
+  # Pipeline conditions
+  isMain:           ${{ eq(variables['Build.SourceBranch'], 'refs/heads/main') }}
+  isProduction:     ${{ eq(variables['Build.SourceBranch'], 'refs/heads/production') }}
+  isTag:            ${{ startsWith(variables['Build.SourceBranch'], 'refs/tags/v') }}
+  isFork:           ${{ eq(variables['System.PullRequest.IsFork'], 'True') }}
+  isPR:             ${{ eq(variables['Build.Reason'], 'PullRequest') }}
+  isScheduled:      ${{ eq(variables['Build.Reason'], 'Schedule') }}
+  isTrustedCI:      ${{ and( eq(variables.isFork,'False'), eq(variables.isPR,'False'), eq(variables.isScheduled,'False') ) }}
+  deployMain:       ${{ and( eq(variables.isMain,'True'), eq(variables.isTrustedCI,'True') ) }}
+
+  # Docker
+  dockerRegistry:   tylabcr.azurecr.io
+  imageName:        tylab-offer-management-service-poc
+  ${{ if eq(variables.isTag, 'False') }}:
+    imageTag:       dev
+  ${{ if eq(variables.isTag, 'True') }}:
+    imageTag:       ${{ replace(variables['Build.SourceBranch'], 'refs/tags/v', '') }}
+  dockerImage:      ${{ variables.dockerRegistry }}/${{ variables.imageName }}
+
+  # Deploy
+  aksEnvironment: tivonysetestazureaks.default
+  vmImage: ubuntu-latest
+
+  # To be overwritten by dev.yaml or prod.yaml
+  webAppName:    unset
