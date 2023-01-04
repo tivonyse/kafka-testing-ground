@@ -5,20 +5,9 @@ trigger:
   branches:
     include:
       - main
-      - feature/*
-      - qa/*
-      - staging/*
-      - bugfix/*
-      - hotfix/*
-  tags:
-    include:
-      - v*
   paths:
     exclude:
       - README.md
-
-pr:
-  - main
 
 pool:
   vmImage: $(vmImage)
