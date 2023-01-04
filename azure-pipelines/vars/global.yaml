@@ -27,6 +27,7 @@ variables:
   # Deploy
   aksEnvironment: tivonysetestazureaks.default
   vmImage: ubuntu-latest
+  azAcrSecret: acrsecret
 
   # To be overwritten by dev.yaml or prod.yaml
   webAppName:    unset
