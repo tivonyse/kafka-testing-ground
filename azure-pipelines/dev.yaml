@@ -60,8 +60,8 @@ stages:
       jobs:
         - template: jobs/publish-artifact.yaml
 
-     Deploy (Disabled)
-     ------
+  # Deploy (Disabled)
+  # ------
   - stage: DeployStage
     displayName: Deploy (Azure Kubernetes Services)
     condition: and(succeeded(), eq(variables.deployMain,'True'))
