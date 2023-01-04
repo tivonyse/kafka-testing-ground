@@ -38,7 +38,7 @@ jobs:
                 kubernetesServiceConnection: 'test-aks-master-enable'
                 namespace: 'ihb'
                 manifests: |
-                  $(Pipeline.Workspace)/manifests/deployment-dev.yml
-                  $(Pipeline.Workspace)/manifests/service-dev.yml
+                  $(Pipeline.Workspace)/manifests/deployment.yml
+                  $(Pipeline.Workspace)/manifests/service.yml
                 imagePullSecrets: $(azAcrSecret)
                 containers: '$(containerRegistry)/$(imageRepository):$(tag)'
