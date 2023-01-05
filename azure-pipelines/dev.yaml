@@ -51,8 +51,8 @@ stages:
 
   # Deploy (Disabled)
   # ------
-  - stage: DeployStage
-    displayName: Deploy (Azure Kubernetes Services)
-    condition: and(succeeded(), eq(variables.deployMain,'True'))
-    jobs:
-      - template: jobs/deploy-service.yaml
+#  - stage: DeployStage
+#    displayName: Deploy (Azure Kubernetes Services)
+#    condition: and(succeeded(), eq(variables.deployMain,'True'))
+#    jobs:
+#      - template: jobs/deploy-service.yaml
