@@ -1,0 +1,21 @@
+# Deployment YAML definition
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tylab-azp-ci
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: tylab-azp-ci
+  template:
+    metadata:
+      labels:
+        app: tylab-azp-ci
+    spec:
+      containers:
+        - name: tylab-azp-ci
+          image: tylabcr.azurecr.io/tylab-azp-ci-poc
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Always

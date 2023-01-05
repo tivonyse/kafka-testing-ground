@@ -1,0 +1,58 @@
+name: $(BuildID)
+
+trigger:
+  batch: true
+  tags:
+    include:
+      - v*
+  paths:
+    exclude:
+      - README.md
+
+pool:
+  vmImage: $(vmImage)
+
+variables:
+  - template: vars/global.yaml
+  - template: vars/dev.yaml
+
+stages:
+
+  # Tests
+  # -----
+  - stage: TestStage
+    displayName: Tests (Maven)
+    condition: eq(variables.isTag, 'False')
+    jobs:
+      - template: jobs/tests.yaml
+
+  # Build Artifact
+  # -----
+  #  - stage: BuildArtifactStage
+  #      displayName: Build artifact (Maven)
+  #      condition: eq(variables.isTag, 'False')
+  #      jobs:
+  #        - template: jobs/publish-artifact.yaml
+
+  # Build
+  # -----
+  - stage: DockerStage
+    displayName: Build (Docker)
+    condition: or(eq(variables.isTag,'True'), and(succeeded(), eq(variables.deployMain,'True')))
+    dependsOn: TestStage
+    jobs:
+      - template: jobs/docker.yaml
+
+  - stage: PublishPipelineArtifactoryStage
+    displayName: Publish Pipeline Artifactory (Docker)
+    condition: or(eq(variables.isTag,'True'), and(succeeded(), eq(variables.deployMain,'True')))
+    jobs:
+      - template: jobs/publish-artifact.yaml
+
+  # Deploy (Disabled)
+  # ------
+  - stage: DeployStage
+    displayName: Deploy (Azure Kubernetes Services)
+    condition: and(succeeded(), eq(variables.deployMain,'True'))
+    jobs:
+      - template: jobs/deploy-service.yaml

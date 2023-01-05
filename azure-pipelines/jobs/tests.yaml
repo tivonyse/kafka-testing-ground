@@ -1,0 +1,15 @@
+jobs:
+  - job: UnitTests
+    displayName: Unit Tests
+    steps:
+      - task: Maven@3
+        displayName: 'Run the Maven test'
+        inputs:
+          mavenPomFile: 'pom.xml'
+          mavenOptions: '-Xmx3072m'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: '1.11'
+          jdkArchitectureOption: 'x64'
+          publishJUnitResults: true
+          testResultsFiles: '**/surefire-reports/TEST-*.xml'
+          goals: 'clean test'
