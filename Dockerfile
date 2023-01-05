@@ -10,7 +10,7 @@ FROM adoptopenjdk:11.0.11_9-jre-openj9-0.26.0-focal@sha256:db3504a5a4c1572c08790
 WORKDIR /opt/app
 
 RUN groupadd --system javauser && useradd -s /usr/sbin/nologin -g javauser javauser
-COPY --from=builder /build/target/kafka-testing-ground-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=builder /build/target/*.jar app.jar
 
 RUN chown -R javauser:javauser .
 

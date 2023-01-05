@@ -26,14 +26,6 @@ stages:
     jobs:
       - template: jobs/tests.yaml
 
-  # Build Artifact
-  # -----
-#  - stage: BuildArtifactStage
-#      displayName: Build artifact (Maven)
-#      condition: eq(variables.isTag, 'False')
-#      jobs:
-#        - template: jobs/publish-artifact.yaml
-
   # Build
   # -----
   - stage: DockerStage
@@ -49,10 +41,10 @@ stages:
     jobs:
       - template: jobs/publish-artifact.yaml
 
-  # Deploy (Disabled)
+  # Deploy
   # ------
-#  - stage: DeployStage
-#    displayName: Deploy (Azure Kubernetes Services)
-#    condition: and(succeeded(), eq(variables.deployMain,'True'))
-#    jobs:
-#      - template: jobs/deploy-service.yaml
+  - stage: DeployStage
+    displayName: Deploy (Azure Kubernetes Services)
+    condition: and(succeeded(), eq(variables.deployMain,'True'))
+    jobs:
+      - template: jobs/deploy-service.yaml
